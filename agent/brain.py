@@ -3,14 +3,13 @@ import os
 import yaml
 import logging
 import httpx
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 
-_ENV_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+load_dotenv()
 logger = logging.getLogger("agentkit")
 
 def _get_api_key() -> str:
-    config = dotenv_values(_ENV_PATH)
-    return config.get("ANTHROPIC_API_KEY", "")
+    return os.environ.get("ANTHROPIC_API_KEY", "")
 
 
 def cargar_config_prompts() -> dict:
